@@ -1,0 +1,104 @@
+<SampleData>
+  <weibo emotion-type="none" id="3">
+    <sentence emotion_tag="N" id="1">25-27岁年纪还小，叫小生(小剩)；</sentence>
+    <sentence emotion_tag="N" id="2">28-30岁已经成熟，叫书生(熟剩)；</sentence>
+    <sentence emotion_tag="N" id="3">31-33岁只能悠着晃着等待机遇，叫优等生(悠等剩)；</sentence>
+    <sentence emotion_tag="N" id="4">34-36岁事业有成钻石男，叫博士生（不是剩）；</sentence>
+    <sentence emotion_tag="N" id="5">37岁往上感觉彻底被逼成剩男了，尊之为毕业生(逼爷剩)；</sentence>
+    <sentence emotion_tag="N" id="6">45岁以后就是超级圣诞老人(剩单老人)啦！</sentence>
+  </weibo>
+  <weibo emotion-type="happiness" id="11">
+    <sentence emotion-1-type="happiness" emotion-2-type="none" emotion_tag="Y" id="1">尼玛！！！</sentence>
+    <sentence emotion-1-type="happiness" emotion-2-type="none" emotion_tag="Y" id="2">突然[笑哭]感叹还好抓鸡是横屏的有木有！！！！！！！！！</sentence>
+    <sentence emotion-1-type="happiness" emotion-2-type="none" emotion_tag="Y" id="3">[大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑] [大笑]</sentence>
+  </weibo>
+  <weibo emotion-type="happiness" id="12">
+    <sentence emotion-1-type="happiness" emotion-2-type="none" emotion_tag="Y" id="1">恭喜第488位投票的是@Summery_WJ 第588位投票的是@JJFederation-霄雯 第888位投票的是@------平行线----- 以上童鞋获得2011银鹭花生牛奶i唱i音乐城市歌会门票一张！</sentence>
+    <sentence emotion-1-type="happiness" emotion-2-type="none" emotion_tag="Y" id="2">私信我留下有效联系方式哦，恭喜恭喜！</sentence>
+  </weibo>
+  <weibo emotion-type="disgust" id="19">
+    <sentence emotion-1-type="disgust" emotion-2-type="none" emotion_tag="Y" id="1">众多只有这一套房的业主向物业求助，物业无奈，居然向110和城管报警，对方值班的都说所有人员都去协助体育中心的大型活动了。[晕]</sentence>
+  </weibo>
+  <weibo emotion-type="happiness" id="20">
+    <sentence emotion_tag="N" id="1">发张一年前得照片,弄瞎你的眼.</sentence>
+    <sentence emotion-1-type="happiness" emotion-2-type="none" emotion_tag="Y" id="2">[晕][晕][晕][晕] 其实我还是刚出生得婴儿啦[害羞] [害羞] [害羞] ,[六一快乐] 各位六一快乐[六一快乐] !</sentence>
+    <sentence emotion-1-type="happiness" emotion-2-type="none" emotion_tag="Y" id="3">[奥特曼] [奥特曼] [奥特曼] [奥特曼]</sentence>
+  </weibo>
+  <weibo emotion-type="anger" id="46">
+    <sentence emotion-1-type="anger" emotion-2-type="none" emotion_tag="Y" id="1">如果这都不叫相配，你告诉什么叫做爱你就要变成你？！</sentence>
+    <sentence emotion-1-type="anger" emotion-2-type="none" emotion_tag="Y" id="2">什么叫做夫妻相啊！！！！</sentence>
+    <sentence emotion-1-type="anger" emotion-2-type="none" emotion_tag="Y" id="3">[抓狂] （图F：yjlove 非邪教勿手滑哦！）</sentence>
+  </weibo>
+  <weibo emotion-type="none" id="266">
+    <sentence emotion_tag="N" id="1">今天，四年级的女儿发了一本书，134页，书名＜共产党好＞。</sentence>
+    <sentence emotion_tag="N" id="2">老师布置作业：1000字议论文一篇，统一题目------共产党好，女儿说不会写，让我帮她，我不会写，谁来帮我？</sentence>
+    <sentence emotion_tag="N" id="3">火速报名，奖品：＜共产党好＞系列丛书....</sentence>
+  </weibo>
+  <weibo emotion-type="none" id="288">
+    <sentence emotion_tag="N" id="1">每次看见宋裕贤倒贴张美丽，然后张美丽又一脸苦逼觉得全世界自己最苦还要陷在两个男人的追求之间无法抉择的时候我就只想做这个表情……</sentence>
+  </weibo>
+  <weibo emotion-type="sadness" id="365">
+    <sentence emotion_tag="N" id="1">折腾了一天，中午从厦门出境，下午在香港入境，在香港机场五层转了半天，先去checkin明天去brisbane的飞机，托运！</sentence>
+    <sentence emotion-1-type="sadness" emotion-2-type="none" emotion_tag="Y" id="2">再去寄存手提箱，再坐小巴出境到深圳，采集了u一堆apple用品，回karen家，我好困啊[泪]累的毛都飞起来了</sentence>
+  </weibo>
+  <weibo emotion-type="none" id="387">
+    <sentence emotion_tag="N" id="1">在家消磨时间的最好时候就是睡觉。</sentence>
+    <sentence emotion_tag="N" id="2">每次都是四点多才想睡，睡醒起来吃饭，没胃口。</sentence>
+    <sentence emotion_tag="N" id="3">一会要去干妈家了解填志愿的事。</sentence>
+    <sentence emotion_tag="N" id="4">虽然千百个不乐意。</sentence>
+  </weibo>
+  <weibo emotion-type="happiness" id="393">
+    <sentence emotion_tag="N" id="1">如果每个男人在今天都对自己女人或曾经爱得死去活来过女人说一声——永远爱您，我的女人........</sentence>
+    <sentence emotion-1-type="like" emotion-2-type="happiness" emotion_tag="Y" id="2">我相信女人的脸上一定笑开了花.......</sentence>
+    <sentence emotion_tag="N" id="3">赞美女人吧——傻男人，女人很好哄的。</sentence>
+    <sentence emotion-1-type="happiness" emotion-2-type="none" emotion_tag="Y" id="4">哈哈哈！</sentence>
+    <sentence emotion-1-type="happiness" emotion-2-type="like" emotion_tag="Y" id="5">别错过今天哦，明天在哄就是假的啊，哈哈哈........</sentence>
+  </weibo>  
+  <weibo emotion-type="none" id="591">
+    <sentence emotion_tag="N" id="1">你会不会想过，有一天突然惊醒，发现自己在高一的课堂上睡着了。</sentence>
+    <sentence emotion_tag="N" id="2">现在经历的所有其实只是一场梦。</sentence>
+    <sentence emotion_tag="N" id="3">阳光照的你脸皱成一团，你告诉同桌你做了一个好长的梦，同桌笑你白痴，让你好好听课。</sentence>
+    <sentence emotion_tag="N" id="4">你发现，现世安稳，岁月静好，一切都充满着希望......</sentence>
+  </weibo>
+  <weibo emotion-type="none" id="610">
+    <sentence emotion_tag="N" id="1">今天中午自助餐的时候听到邻座两位绅士在探讨什么是幸福，</sentence>
+    <sentence emotion_tag="N" id="2">一个说，幸福呀其实就做真实的自己，这个社会太扭曲人了；</sentence>
+    <sentence emotion_tag="N" id="3">另外一位说，幸福啊，就是能够和家人永远快乐地在一起就足够了......</sentence>
+  </weibo>
+  <weibo emotion-type="none" id="623">
+    <sentence emotion_tag="N" id="1">艺术家与生意人的矛盾定位，必定贯穿每个企业主的一生，媚雅或媚俗，无绝对之答案，唯胜者为王吧！</sentence>
+  </weibo>
+  <weibo emotion-type="none" id="631">
+    <sentence emotion_tag="N" id="1">生命就像是一个疗伤的过程，我们受伤，痊愈，再受伤，再治愈。</sentence>
+    <sentence emotion_tag="N" id="2">每一次的愈合好像又是为了迎接下一次的受伤……</sentence>
+    <sentence emotion_tag="N" id="3">然后在不断的受伤与愈合中，我们慢慢学会了成长。</sentence>
+  </weibo>
+  <weibo emotion-type="none" id="651">
+    <sentence emotion_tag="N" id="1">今日推荐歌曲：潘广益 - 纪念の歌 　　有时候，发现自己一夜之间长大了。</sentence>
+    <sentence emotion_tag="N" id="2">有时候，希望能找个人好好疼爱自己，渴望一种安全感。</sentence>
+    <sentence emotion_tag="N" id="3">可当那个可以疼你的人出现的时候，你却偏执地退隐。</sentence>
+  </weibo>
+  <weibo emotion-type="sadness" id="658">
+    <sentence emotion_tag="N" id="1">贝玲妃的脸部紧致霜。。。</sentence>
+    <sentence emotion-1-type="disgust" emotion-2-type="none" emotion_tag="Y" id="2">价格很不可爱 400多大洋一只</sentence>
+    <sentence emotion-1-type="sadness" emotion-2-type="none" emotion_tag="Y" id="3">我第一次用还搓泥- -很杯具啊。。。</sentence>
+    <sentence emotion_tag="N" id="4">各种实验证明 贝玲妃家的护肤品没有彩妆来的可爱 恩恩</sentence>
+  </weibo>
+  <weibo emotion-type="disgust" id="666">
+    <sentence emotion_tag="N" id="1">没错。</sentence>
+    <sentence emotion-1-type="disgust" emotion-2-type="anger" emotion_tag="Y" id="2">中国的法律就是打着正义而且被保护的幌子来更好的压榨老百姓。</sentence>
+    <sentence emotion-1-type="disgust" emotion-2-type="none" emotion_tag="Y" id="3">普通人永远是牺牲品。</sentence>
+    <sentence emotion-1-type="anger" emotion-2-type="disgust" emotion_tag="Y" id="4">不要说的那么伟大。</sentence>
+    <sentence emotion-1-type="disgust" emotion-2-type="anger" emotion_tag="Y" id="5">不过是为欺负无权无势的人找咯更好的借口。</sentence>
+    <sentence emotion-1-type="disgust" emotion-2-type="none" emotion_tag="Y" id="6">根本就不能保护普通人。</sentence>
+  </weibo>
+  <weibo emotion-type="none" id="709">
+    <sentence emotion_tag="N" id="1">这部电影聚焦于一个15人的哨所，它以一名在战斗中牺牲的战士雷斯特雷波命名以示纪念，而这个哨所被认为是在美国军队的最危险的职位之一。</sentence>
+    <sentence emotion_tag="N" id="2">在这部充满体验感的电影中，摄影机从未离开这个山谷，也没有与将军或是外交官的采访，你将伴随着镜头去体验片中的爆炸、恶战和兄弟情谊</sentence>
+  </weibo>
+  <weibo emotion-type="anger" id="3590">
+    <sentence emotion-1-type="anger" emotion-2-type="none" emotion_tag="Y" id="1">尼玛一个个是没上过学没受过教育怎么地？</sentence>
+    <sentence emotion-1-type="anger" emotion-2-type="disgust" emotion_tag="Y" id="2">最起码的课堂秩序和尊重都木有啊，有木有？！</sentence>
+    <sentence emotion-1-type="disgust" emotion-2-type="none" emotion_tag="Y" id="3">面对这样的学僧，劳斯同志您伤不起啊~伤不起！</sentence>
+  </weibo>
+</SampleData>

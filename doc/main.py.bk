@@ -1,0 +1,198 @@
+# #-*- coding:utf-8 -*-
+# from xml.etree import cElementTree as et
+# import jieba
+# import jieba.posseg
+# import random
+# import copy
+# from gensim.models import Word2Vec
+# from snownlp import SnowNLP
+#
+# XML_PATH = './weibo.xml'
+# XML_TRAIN_PATH = './weibo_train.xml'
+# XML_TEST_PATH = './weibo_test.xml'
+#
+# # 读文件
+# def read_file(path):
+#   content = ''
+#   with open(path, 'r') as p:
+#     content = reduce(lambda x,y:x+y, p)
+#   return content
+#
+# def _get_content_emotion(sentence):
+#   if sentence.attrib['emotion_tag'] == 'N':
+#     return ['none']
+#   try:
+#     return [sentence.attrib['emotion-1-type'], sentence.attrib['emotion-2-type']]
+#   except KeyError:
+#     return [sentence.attrib['emotion-1-type']]
+#
+# if __name__ == '__main__':
+#   xml_tree = et.parse(XML_TRAIN_PATH)
+#   root = xml_tree.getroot()
+#
+#   # weibo_emotion[i] : weibo[i]'s emotion
+#   weibo_emotion = map(lambda weibo: weibo.attrib['emotion-type'], root.findall('weibo'))
+#
+#   # weibo_content[i][j] : weibo[i], j'th sentence
+#   weibo_content = map(lambda weibo: map(lambda sentence: sentence, weibo.findall('sentence')), root.findall('weibo'))
+#
+#   # weibo_content_emotion[i][j] : weibo[i], j'th sentence's emotion
+#   weibo_content_emotion = map(lambda weibo: map(_get_content_emotion, weibo), weibo_content)
+#
+#   # weibo_content_set
+#   weibo_content_set = list(reduce(lambda x, y: x | y,
+#                       map(lambda weibo: reduce(lambda x, y: x | y, weibo),
+#                       map(lambda weibo: map(lambda sentence:set(sentence), weibo), weibo_content_emotion))))
+#
+#   # print len(weibo_emotion), len(weibo_content), len(weibo_content_emotion)
+#
+#   weibo_content = map(lambda weibo: map(lambda sentence: map(lambda each: each, sentence), weibo),
+#                   map(lambda weibo: map(lambda sentence:
+#                   [i for i in jieba.posseg.cut(sentence.text)], weibo), weibo_content))
+#   weibo_content = map(lambda weibo: map(lambda sentence:
+#                   filter(lambda word: word.flag != 'x', sentence), weibo), weibo_content)
+#   weibo_content = map(lambda weibo: map(lambda sentence:
+#                   map(lambda each:each.word, sentence), weibo), weibo_content)
+#   weibo_content = map(lambda weibo: map(lambda sentence:
+#                   reduce(lambda x, y: x + ' ' + y, sentence), weibo), weibo_content)
+#   weibo_all_word = []
+#   map(lambda weibo: map(lambda sentence: weibo_all_word.append(sentence), weibo), weibo_content)
+#
+# 希望利用weibo.xml做训练
+# 将每条微博的每句话分词后转换成词向量的集合，求每句话在一个词空间的相对位置，利用naive bayes进行分类。
+# 再根据分类结果，将微博下属的句子整合起来，使用weibo.xml对应的标签来进行聚类的训练。
+# 没有实现的原因是没有找到合适的词向量转换方式，校园网络环境太差，无法下载word2vec。
+
+
+#-*- coding:utf-8 -*-
+import re
+import jieba
+import jieba.posseg
+import numpy
+from snownlp import SnowNLP
+
+# 生成数闭包
+def num_get():
+  cnt = [0]
+  def num_getter():
+    cnt[0] += 1
+    return cnt[0]
+  return num_getter
+
+# 继承重写list的extend方法，实现链式extend
+class ListWithLinkExtend(list):
+  def extend(self, value):
+    super(ListWithLinkExtend, self).extend(value)
+    return self
+
+WORD_CLASS_COUNT = 3
+WEIBO_PATH = './weibo.xml'
+EMOTION_WORD_PATH = './EmotionWord.txt'
+SENTIMENT_WORD_PATH = './word_sentiment.txt'
+SIGNAL_PATTERN = '[\s+\.\!\/\_\,\$\?\!\@\#\$\%\^\&\*\(\)\_\+\=\-\%\^\*\:(+\"\']+' \
+                 '|[+——！：“”；，。？、~《》【】@#￥%……&*（）]+'
+LABEL_REGEXP = re.compile('<sentence.*>.*</sentence>')
+EMOTION_REGEXP = re.compile('emotion-\d+-type=\".+\"')
+SENTENCE_REGEXP = re.compile('>(.*)<')
+EMOTION_DETAIL_REGEXP = re.compile('\"(.+?)\"')
+GET_NUM = num_get()
+
+# 读文件
+def read_file(path):
+  content = ''
+  with open(path, 'r') as p:
+    content = reduce(lambda x,y:x+y, p)
+  return filter(lambda each:each!='', content.split('\n'))
+
+# 读取EmotionWord.txt，获取dict{词语：各个属性}映射
+def get_word_class_dic():
+  # 只取主 (词语, 情感类, 强度, 极性)
+  words = map(lambda line: tuple(line.split(' ')[:4]),map(lambda line: re.sub('[  \r]', ' ', line),read_file(EMOTION_WORD_PATH)))
+  word_class_dic = [[] for i in range(0, WORD_CLASS_COUNT+1)]
+  for word in words:
+    try:
+      word_class_dic[int(word[3])].append(word)
+    except IndexError:
+      pass
+  word_class_dic = map(lambda each: map(lambda line: {line[0]: line[1:]}, each), word_class_dic)
+  return word_class_dic
+
+#　用SnowNLP获取每一篇博文中词语的positive程度，读了源码，是贝叶斯分类
+# （微博中的词语几乎没有在给的语料库中出现）
+def _get_word_sentiment(words):
+  fp = open(SENTIMENT_WORD_PATH, 'w')
+  for line in words:
+    for each in line:
+      fp.write(each.encode('utf-8')+" ".encode('utf-8')+str(SnowNLP(each).sentiments).encode('utf-8')+"\n".encode('utf-8'))
+  fp.close()
+
+# 给文章分词，去标点
+def get_spilited_words(string):
+  return map(lambda each: each.word,filter(lambda line: line.flag != 'x',[i for i in jieba.posseg.cut(string)]))
+
+# 读取weibo.xml中的内容，返回分好词的正文内容以及相应的标签和标签的原文映射
+def get_train_data():
+  raw = map(lambda each:each[0],filter(lambda each:len(each) == 1,map(lambda each:LABEL_REGEXP.findall(each),read_file(WEIBO_PATH))))
+  sentence = map(lambda each: SENTENCE_REGEXP.findall(each)[0],raw)
+  emotioned = map(lambda line: EMOTION_REGEXP.findall(line), raw)
+  labeled_sentence = map(lambda line: (line[0], EMOTION_DETAIL_REGEXP.findall(line[1][0])),filter(lambda line: len(line[1]) == 1,zip(sentence, emotioned)))
+  label = dict(map(lambda line:(line, GET_NUM()),list(set(reduce(lambda a, b: ListWithLinkExtend(a).extend(ListWithLinkExtend(b)),map(lambda each:each[1], labeled_sentence))))))
+  train_data = map(lambda each: ([i for i in jieba.posseg.cut(each[0])], each[1]),map(lambda each: (each[0],map(lambda emo: label[emo], each[1])), labeled_sentence))
+  train_input = map(lambda each: map(lambda line: line.word, each),map(lambda each: filter(lambda line: line.flag != 'x', each),map(lambda each: each[0], train_data)))
+  train_label = map(lambda each: each[1][0], train_data)
+  return train_input, train_label, label
+
+# 查询词语的词性及其属性，不存在返回None
+def find_word_type(word, word_class_dic):
+  for i in range(0, WORD_CLASS_COUNT+1):
+    if word_class_dic[i].has_key(word):
+      return word, word_class_dic[i][word]
+  return word, None
+
+def get_word_sentiment(words):
+  words = map(lambda each: map(lambda line: SnowNLP(line).sentiments, each), words)
+  return words
+
+
+# word_class_dic = get_word_class_dic()
+train_input, train_label, label = get_train_data()
+train_mat = get_word_sentiment(train_input)
+train_mat = map(lambda each: map(lambda line: line-0.5, each), train_mat)
+train_mat = reduce(lambda x, y: x + y, train_mat)
+emotion_label = [0,0,1,-1,-1,-1,1,-1,1]
+
+correct = 0.0
+
+for i in range(0, len(train_input)):
+  s = reduce(lambda x, y: x+' '+y, train_input[i])
+  print s
+  print 'Rate: ', train_mat[i]
+  if train_mat[i] > 0:
+    print 'Positive'
+  elif train_mat[i] < 0:
+    print 'Negative'
+  else:
+    print 'Middle'
+  print 'Origin Result: ', emotion_label[train_label[i]]
+  print ''
+  if (train_mat[i] < 0 and emotion_label[train_label[i]] < 0) or \
+    (train_mat[i] > 0 and emotion_label[train_label[i]] > 0) or \
+    (train_mat[i] == 0 and emotion_label[train_label[i]] == 0):
+    correct += 1
+
+print 'Correct ratio: ', str(float(correct) / float(len(train_input)) * 100.0) + '%'
+
+# 没有用weibo.xml做训练
+# 对每一条微博信息进行分词，并且使用snownlp求出每一个词语的情感分值（查看源代码看到用的是naive bayes）。
+# [0,1]之间的一个浮点数，以0.5为界（中性），大于0.5是积极，小于0.5是消极）
+# 最后将每一篇微博信息的情感分值-0.5求和，如果是正数则说明本篇新闻是积极的，负数是消极的，0是中性的。
+# 问题：
+# 情感词未覆盖
+# 口语化的词或网络热词
+# 误识别
+# 不含敏感词
+# 反讽
+# 情感词类型较多
+# 英文情感词
+# 含有正向词，语境相反
+# 使用可以联系上下文分析的模型（比如RNN）
