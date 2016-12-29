@@ -1,10 +1,8 @@
 #-*- coding:utf-8 -*-
 from xml.etree import cElementTree as et
-from gensim.models import Word2Vec
+from collections import Counter
 import jieba.posseg
 import bayes
-from sklearn.feature_extraction import DictVectorizer
-from collections import Counter
 
 XML_PATH = './weibo.xml'
 XML_TRAIN_PATH = './weibo_train.xml'
@@ -152,8 +150,12 @@ if __name__ == '__main__':
   # 投票表决，如果感情全部相同则认为是中性
   sum_test_label = map(lambda weibo: Counter(weibo).most_common(1)[0], sum_test_label)
   test_weibo_emotion = map(lambda key: WEIBO_EMOTION_DICT[key], test_weibo_emotion)
+  ret = 0
   for i in range(0, len(sum_test_label)):
     print 'Predict : ', sum_test_label[i][0], ' Actually : ', test_weibo_emotion[i]
+    if (sum_test_label[i][0] > 0 and test_weibo_emotion[i] > 0) or (sum_test_label[i][0] < 0 and test_weibo_emotion[i] < 0) or (sum_test_label[i][0] == 0 and test_weibo_emotion[i] == 0):
+      ret += 1
+  print float(ret) / float(len(sum_test_label))
 
 # 词典就是train test中的词语，每句话划分成一个大小为len(dic)的向量
 # 训练算法：双层bayes，第一层区分一句话有、无感情色彩；第二层对有感情色彩的加以区分，区分是何种感情色彩。
